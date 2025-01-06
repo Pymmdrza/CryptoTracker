@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js -c BTC,ETH",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
