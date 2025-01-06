@@ -52,14 +52,17 @@ node index.js -c BTC,ETH -d 60
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `node index.js -c BTC` | Track single cryptocurrency | Tracks Bitcoin only |
-| `node index.js -c BTC,ETH,XRP` | Track multiple cryptocurrencies | Tracks Bitcoin, Ethereum, and Ripple |
-| `node index.js -c BTC,ETH -d 60` | Custom update interval | Updates every 60 seconds |
-| `node index.js -c BTC -o custom_data` | Custom output directory | Saves data to custom_data folder |
+| `node index.js -c BTC` | Track single cryptocurrency | Tracks **Bitcoin** only |
+| `node index.js -c BTC,ETH,XRP` | Track multiple cryptocurrencies | Tracks **Bitcoin** , **Ethereum**, and **Ripple** |
+| `node index.js -c BTC,ETH -d 60` | Custom update interval | Updates every `60` seconds |
+| `node index.js -c BTC -o custom_data` | Custom output directory | Saves data to `custom_data` folder |
 | `node index.js -c BTC,ETH --help` | Show help menu | Displays all available options |
 | `node index.js -v` | Show version | Displays current version |
-| `node index.js -c BTC,ETH -d 15` | Fast updates | Updates every 15 seconds |
-| `node index.js -c ALL` | Track all available coins | Tracks all supported cryptocurrencies |
+| `node index.js -c BTC,ETH -d 15` | Fast updates | Updates every `15` seconds |
+| `node index.js -c ALL` | Track **all** available coins | Tracks all supported cryptocurrencies |
+
+>[!NOTE]
+>Support Coin: [PAIRS](.github/PAIRS.md)
 
 ## 📊 Data Export
 
