@@ -10,7 +10,6 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Configuration
-const BASE_URL = "https://api.kucoin.com/api/v1/market/allTickers";
 const OUTPUT_DIR = path.join(__dirname, 'dataset');
 
 // Helper Functions
@@ -31,10 +30,26 @@ async function ensureOutputDir() {
   }
 }
 
-async function getMarketData() {
+async function getMarketData(coins) {
   try {
-    const { data } = await axios.get(BASE_URL);
-    return data.data.ticker;
+    if (coins.length <= 5) {
+      // Use individual API calls for better performance with fewer coins
+      const promises = coins.map(coin => 
+        axios.get(`https://api.kucoin.com/api/v1/market/stats?symbol=${coin}-USDT`)
+      );
+      const responses = await Promise.all(promises);
+      return responses.map(response => ({
+        symbol: response.data.data.symbol,
+        last: response.data.data.last,
+        high: response.data.data.high,
+        low: response.data.data.low,
+        changeRate: response.data.data.changeRate
+      }));
+    } else {
+      // Use allTickers endpoint for many coins
+      const { data } = await axios.get("https://api.kucoin.com/api/v1/market/allTickers");
+      return data.data.ticker;
+    }
   } catch (error) {
     console.error(chalk.red('Error fetching market data:', error.message));
     return null;
@@ -42,7 +57,10 @@ async function getMarketData() {
 }
 
 function getCoinDetails(coin, tickers) {
-  const ticker = tickers.find(t => t.symbol === `${coin}-USDT`);
+  const ticker = Array.isArray(tickers) 
+    ? tickers.find(t => t.symbol === `${coin}-USDT`)
+    : tickers;
+    
   if (!ticker) return null;
 
   return {
@@ -75,7 +93,7 @@ async function displayPrices(coins, delay = 30) {
   while (true) {
     try {
       spinner.start();
-      const tickers = await getMarketData();
+      const tickers = await getMarketData(coins);
       if (!tickers) {
         spinner.fail('Failed to fetch data. Retrying...');
         await new Promise(resolve => setTimeout(resolve, 5000));
@@ -83,7 +101,6 @@ async function displayPrices(coins, delay = 30) {
       }
       
       console.clear();
-      console.log(chalk.yellow('Press Ctrl+C to stop the tracker\n'));
       
       const table = new Table({
         head: ['Coin', 'Price', 'High (24h)', 'Low (24h)', 'Change %', 'Updated'],
@@ -118,7 +135,17 @@ async function displayPrices(coins, delay = 30) {
 
       spinner.stop();
       console.log(table.toString());
-      await new Promise(resolve => setTimeout(resolve, delay * 1000));
+
+      // Add countdown timer and optimization message
+      console.log(chalk.gray('\nOptimized API calls: Using individual endpoints for better performance'));
+      
+      for (let remaining = delay; remaining > 0; remaining--) {
+        process.stdout.write(`\r${chalk.cyan(`Next update in ${remaining} seconds...`)}`);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+      process.stdout.write('\r' + ' '.repeat(50) + '\r');
+      
+      console.log(chalk.gray('\nPress Ctrl+C to stop the tracker'));
       
     } catch (error) {
       spinner.fail(chalk.red('Error:', error.message));
@@ -129,7 +156,7 @@ async function displayPrices(coins, delay = 30) {
 
 // CLI Setup
 program
-  .version('1.0.3')
+  .version('1.0.0')
   .description('Cryptocurrency price tracker with real-time updates')
   .option('-c, --coins <symbols>', 'Comma-separated list of coin symbols (e.g., BTC,ETH,XRP)')
   .option('-d, --delay <seconds>', 'Update delay in seconds', '30')
