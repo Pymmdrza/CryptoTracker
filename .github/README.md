@@ -86,4 +86,6 @@ Github : [@Pymmdrza](https://github.com/Pymmdrza 'Programmer and Owner : Pymmdrz
 
 ## Donate
 
+Bitcoin Wallet : `1MMDRZAcM6dzmdMUSV8pDdAPDFpwzve9Fc`
+
 
