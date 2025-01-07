@@ -1,4 +1,6 @@
-# 🚀 Crypto Tracker Pro
+# Crypto Tracker CLI
+
+![Crypto Tracker CLI](https://raw.githubusercontent.com/Pymmdrza/CryptoTracker/refs/heads/main/.github/CryptoTracker_Header.webp 'Crypto Tracker CLI')
 
 Real-time cryptocurrency price tracking CLI tool with advanced monitoring capabilities and data export features.
 
@@ -6,7 +8,7 @@ Real-time cryptocurrency price tracking CLI tool with advanced monitoring capabi
 ![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## ✨ Features
+## Features
 
 - Real-time price tracking for multiple cryptocurrencies
 - Beautiful CLI interface with color-coded price changes
@@ -15,7 +17,7 @@ Real-time cryptocurrency price tracking CLI tool with advanced monitoring capabi
 - Support for multiple cryptocurrencies
 - Low memory footprint
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -48,7 +50,7 @@ node index.js -c BTC,ETH -d 60
 - `-d, --delay <seconds>`: Update interval in seconds (default: 30)
 - `-o, --output <dir>`: Custom output directory for CSV files
 
-## 📊 Command Reference
+## Command Reference
 
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -62,19 +64,26 @@ node index.js -c BTC,ETH -d 60
 | `node index.js -c ALL` | Track **all** available coins | Tracks all supported cryptocurrencies |
 
 >[!NOTE]
->Support Coin: [PAIRS](.github/PAIRS.md)
+>Support Coin: [PAIRS](./PAIRS.md)
 
-## 📊 Data Export
+## Data Export
 
 CSV files are automatically generated in the `dataset` directory with the following format:
 ```
 Symbol,Price,24h High,24h Low,Change %,Timestamp
 ```
 
-## 📝 License
+## License
 
 MIT License - see the [LICENSE](LICENSE) file for details
 
-## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
+## Programmer & Owner
+
+Credit : [Mmdrza.Com](https://mmdrza.com 'Cryptocurrencie Software and Tools')
+
+Github : [@Pymmdrza](https://github.com/Pymmdrza 'Programmer and Owner : Pymmdrza')
+
+## Donate
+
+
