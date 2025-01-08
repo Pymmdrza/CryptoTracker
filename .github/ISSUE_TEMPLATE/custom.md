@@ -1,9 +1,9 @@
 ---
-name: Issue - Crypto Tracker
+name: Crypto Tracker Issue
 about: All Issue and report bug or question about crypto tracker
-title: '` CT ` # Issue : '
+title: '` #CTG ` Crypto Tracker : '
 labels: 'bug, need-triage, contact, question, dev'
-assignees: ''
+assignees: 'Pymmdrza'
 
 ---
 
